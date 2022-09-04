@@ -19,16 +19,16 @@ class LoginPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           ListTile(
-            leading: GestureDetector(
-                onTap: () {
-                  showCountryPicker(
-                      context: context,
-                      onSelect: (country) {
-                        loginPageGetController.selectedCountry.value = country;
-                      });
-                },
-                child: Text(
-                    loginPageGetController.selectedCountry.value.displayName)),
+            leading: GestureDetector(onTap: () {
+              showCountryPicker(
+                  context: context,
+                  onSelect: (country) {
+                    loginPageGetController.selectedCountry.value = country;
+                  });
+            }, child: Obx(() {
+              return Text(
+                  loginPageGetController.selectedCountry.value.displayName);
+            })),
             title: TextFormField(
               controller: loginPageGetController.phoneController,
               decoration: InputDecoration(

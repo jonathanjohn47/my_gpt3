@@ -21,14 +21,17 @@ class LoginPageGetController extends GetxController {
             email: AppConstants.emailForTemporaryLogin,
             password: AppConstants.passwordForTemporaryLogin)
         .then((value) {
+      print(selectedCountry.value.phoneCode + phoneController.text);
       FirebaseFirestore.instance
           .collection(AppConstants.users)
-          .doc(selectedCountry.value.phoneCode + phoneController.text)
+          .doc('+' + selectedCountry.value.phoneCode + phoneController.text)
           .get()
           .then((value) {
         FirebaseAuth.instance.signOut();
         if (value.exists) {
           FirebaseAuth.instance.verifyPhoneNumber(
+              phoneNumber:
+                  '+' + selectedCountry.value.phoneCode + phoneController.text,
               verificationCompleted: (credential) {
                 FirebaseAuth.instance
                     .signInWithCredential(credential)
@@ -68,7 +71,17 @@ class LoginPageGetController extends GetxController {
               },
               codeAutoRetrievalTimeout: (verificationId) {});
         } else {
-          Get.snackbar('Error', 'User not found');
+          Get.dialog(AlertDialog(
+            title: Text('User not found'),
+            content: Text('User Not Found'),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  child: Text('Ok'))
+            ],
+          ));
         }
       });
     });
