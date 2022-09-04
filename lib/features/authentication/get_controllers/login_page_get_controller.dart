@@ -89,11 +89,14 @@ class LoginPageGetController extends GetxController {
 
   @override
   void onInit() {
-    if (FirebaseAuth.instance.currentUser != null) {
-      if (FirebaseAuth.instance.currentUser!.phoneNumber != null) {
-        Get.offAll(() => DashboardPage());
+    Future.delayed(Duration(milliseconds: 500), () {
+      if (FirebaseAuth.instance.currentUser != null) {
+        if (FirebaseAuth.instance.currentUser!.phoneNumber != null) {
+          Get.offAll(() => DashboardPage());
+        }
       }
-    }
+    });
+
     super.onInit();
   }
 }

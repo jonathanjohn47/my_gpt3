@@ -21,8 +21,8 @@ class PromptModel {
   double temperature;
   int maxTokens;
   int topP;
-  int frequencyPenalty;
-  int presencePenalty;
+  double frequencyPenalty;
+  double presencePenalty;
 
   factory PromptModel.fromJson(Map<String, dynamic> json) => PromptModel(
         model: json["model"],
