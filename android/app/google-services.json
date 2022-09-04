@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "650315488044",
+    "project_id": "mygpt3-332af",
+    "storage_bucket": "mygpt3-332af.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:650315488044:android:c1203ed067028d642a2a89",
+        "android_client_info": {
+          "package_name": "com.app.my_gpt3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "650315488044-9r2nbci2btv6p9ig2rvu7taro6lrmnac.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.my_gpt3",
+            "certificate_hash": "70891c37f38523cbce1ab6472374f80c917a21e4"
+          }
+        },
+        {
+          "client_id": "650315488044-9ehr3b8tbhfnkpo6olit39mqg9e512cm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7VKn6b8y6ZBAKjCErYj5Tgq33zpMMTf0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "650315488044-9ehr3b8tbhfnkpo6olit39mqg9e512cm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

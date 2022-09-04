@@ -58,7 +58,10 @@ class DashboardPage extends StatelessWidget {
       bottomNavigationBar: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          StandardButton(text: 'Submit'),
+          StandardButton(
+            text: 'Submit',
+            onPressed: () {},
+          ),
         ],
       ),
     );

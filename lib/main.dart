@@ -1,9 +1,11 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:my_gpt3/core/app_colors.dart';
+import 'package:my_gpt3/features/authentication/ui/login_page.dart';
 
-import 'features/dashboard/ui/dashboard_page.dart';
-
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -28,7 +30,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: AppColors.primary,
         secondaryHeaderColor: AppColors.secondary,
       ),
-      home: DashboardPage(),
+      home: LoginPage(),
     );
   }
 }
