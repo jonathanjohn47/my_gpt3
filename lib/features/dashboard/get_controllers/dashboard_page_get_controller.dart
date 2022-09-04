@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -9,6 +10,8 @@ import 'package:http/http.dart' as http;
 import 'package:my_gpt3/core/app_constants.dart';
 import 'package:my_gpt3/features/dashboard/models/prompt_model.dart';
 import 'package:my_gpt3/features/dashboard/models/response_model.dart';
+
+import '../../authentication/ui/login_page.dart';
 
 class DashboardPageGetController extends GetxController {
   TextEditingController promptController = TextEditingController();
@@ -62,5 +65,11 @@ class DashboardPageGetController extends GetxController {
       }
       showLoader.value = false;
     });
+  }
+
+  void logout() {
+    FirebaseAuth.instance.signOut();
+    Get.deleteAll();
+    Get.offAll(() => LoginPage());
   }
 }

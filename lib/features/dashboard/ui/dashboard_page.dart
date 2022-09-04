@@ -68,7 +68,10 @@ class DashboardPage extends StatelessWidget {
               ],
             ),
           ),
-          Divider(),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Divider(thickness: 2, color: Theme.of(context).primaryColorDark,),
+          ),
           Expanded(
             flex: 3,
             child: SingleChildScrollView(
@@ -132,7 +135,7 @@ class DashboardPage extends StatelessWidget {
                 return dashboardPageGetController.showLoader.value
                     ? Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: CircularProgressIndicator(),
+                      child: CircularProgressIndicator(color: Theme.of(context).secondaryHeaderColor,),
                     )
                     : StandardButton(
                         text: 'Submit',
@@ -147,113 +150,124 @@ class DashboardPage extends StatelessWidget {
         ],
       ),
       drawer: Drawer(
-        child: SingleChildScrollView(
-          child: SizedBox(
-            height: Get.height,
-            child: ListView(
-              children: [
-                DrawerHeader(
-                  child: Wrap(
-                    direction: Axis.vertical,
-                    children: [
-                      SizedBox(
-                          width: 100,
-                          height: 100,
-                          child: Image.asset('assets/images/gpt3_logo.jpeg')),
-                      Text(
-                        'My GPT3',
-                        style: TextStyle(color: Colors.white, fontSize: 24),
-                      ),
-                    ],
-                  ),
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
-                  ),
+        child: SafeArea(
+          child: Column(
+            children: [
+              Container(
+                height: Get.height * 0.3,
+                child: Wrap(
+                  direction: Axis.vertical,
+                  children: [
+                    SizedBox(
+
+                        height: Get.height * 0.2,
+                        child: Image.asset('assets/images/gpt3_logo.jpeg')),
+                    Text(
+                      'My GPT3',
+                      style: TextStyle(color: Theme.of(context).primaryColorDark, fontSize: 36, fontWeight: FontWeight.bold),
+                    ),
+                  ],
                 ),
-                ListTile(
-                  leading: Text('Temperature'),
-                  title: Obx(() {
-                    return Slider(
-                      value: dashboardPageGetController.temperature.value,
-                      onChanged: (double value) {
-                        dashboardPageGetController.temperature.value = value;
-                      },
-                      min: 0,
-                      max: 1,
-                      divisions: 100,
-                      label:
-                          dashboardPageGetController.temperature.value.toString(),
-                    );
-                  }),
-                  trailing: Obx(() {
-                    return Text(
-                        dashboardPageGetController.temperature.value.toString());
-                  }),
+
+              ),
+              Divider(thickness: 2,),
+              Expanded(
+                child: Column(
+                  children: [
+                    ListTile(
+                      leading: Text('Temperature'),
+                      title: Obx(() {
+                        return Slider(
+                          value: dashboardPageGetController.temperature.value,
+                          onChanged: (double value) {
+                            dashboardPageGetController.temperature.value = value;
+                          },
+                          min: 0,
+                          max: 1,
+                          divisions: 100,
+                          label:
+                              dashboardPageGetController.temperature.value.toString(),
+                        );
+                      }),
+                      trailing: Obx(() {
+                        return Text(
+                            dashboardPageGetController.temperature.value.toString());
+                      }),
+                    ),
+                    ListTile(
+                      leading: Text('Max Tokens'),
+                      title: Obx(() {
+                        return Slider(
+                          value: dashboardPageGetController.maxTokens.value / 4000,
+                          onChanged: (double value) {
+                            dashboardPageGetController.maxTokens.value =
+                                (value * 4000).round();
+                          },
+                          min: 0,
+                          max: 1,
+                          divisions: 4000,
+                          label: dashboardPageGetController.maxTokens.value.toString(),
+                        );
+                      }),
+                      trailing: Obx(() {
+                        return Text(
+                            dashboardPageGetController.maxTokens.value.toString());
+                      }),
+                    ),
+                    ListTile(
+                      leading: Text('Frequency\nPenalty'),
+                      title: Obx(() {
+                        return Slider(
+                          value: dashboardPageGetController.frequencyPenalty.value / 2,
+                          onChanged: (double value) {
+                            dashboardPageGetController.frequencyPenalty.value =
+                                (value * 2);
+                          },
+                          min: 0,
+                          max: 1,
+                          divisions: 200,
+                          label: dashboardPageGetController.frequencyPenalty.value
+                              .toString(),
+                        );
+                      }),
+                      trailing: Obx(() {
+                        return Text(dashboardPageGetController.frequencyPenalty.value
+                            .toString());
+                      }),
+                    ),
+                    ListTile(
+                      leading: Text('Presence\nPenalty'),
+                      title: Obx(() {
+                        return Slider(
+                          value: dashboardPageGetController.presencePenalty.value / 2,
+                          onChanged: (double value) {
+                            dashboardPageGetController.presencePenalty.value =
+                                (value * 2);
+                          },
+                          min: 0,
+                          max: 1,
+                          divisions: 200,
+                          label: dashboardPageGetController.presencePenalty.value
+                              .toString(),
+                        );
+                      }),
+                      trailing: Obx(() {
+                        return Text(dashboardPageGetController.presencePenalty.value
+                            .toString());
+                      }),
+                    ),
+                  ],
                 ),
-                ListTile(
-                  leading: Text('Max Tokens'),
-                  title: Obx(() {
-                    return Slider(
-                      value: dashboardPageGetController.maxTokens.value / 4000,
-                      onChanged: (double value) {
-                        dashboardPageGetController.maxTokens.value =
-                            (value * 4000).round();
-                      },
-                      min: 0,
-                      max: 1,
-                      divisions: 4000,
-                      label: dashboardPageGetController.maxTokens.value.toString(),
-                    );
-                  }),
-                  trailing: Obx(() {
-                    return Text(
-                        dashboardPageGetController.maxTokens.value.toString());
-                  }),
-                ),
-                ListTile(
-                  leading: Text('Frequency\nPenalty'),
-                  title: Obx(() {
-                    return Slider(
-                      value: dashboardPageGetController.frequencyPenalty.value / 2,
-                      onChanged: (double value) {
-                        dashboardPageGetController.frequencyPenalty.value =
-                            (value * 2);
-                      },
-                      min: 0,
-                      max: 1,
-                      divisions: 200,
-                      label: dashboardPageGetController.frequencyPenalty.value
-                          .toString(),
-                    );
-                  }),
-                  trailing: Obx(() {
-                    return Text(dashboardPageGetController.frequencyPenalty.value
-                        .toString());
-                  }),
-                ),
-                ListTile(
-                  leading: Text('Presence\nPenalty'),
-                  title: Obx(() {
-                    return Slider(
-                      value: dashboardPageGetController.presencePenalty.value / 2,
-                      onChanged: (double value) {
-                        dashboardPageGetController.presencePenalty.value =
-                            (value * 2);
-                      },
-                      min: 0,
-                      max: 1,
-                      divisions: 200,
-                      label: dashboardPageGetController.presencePenalty.value
-                          .toString(),
-                    );
-                  }),
-                  trailing: Obx(() {
-                    return Text(dashboardPageGetController.presencePenalty.value
-                        .toString());
-                  }),
-                ),
-              ],
-            ),
+              ),
+              Divider(thickness: 2,),
+              ListTile(
+                leading: Icon(Icons.logout),
+                title: Text('Logout'),
+                onTap: () {
+                  dashboardPageGetController.logout();
+                },
+              )
+            ],
           ),
         ),
       ),
